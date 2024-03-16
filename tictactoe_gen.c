@@ -69,9 +69,7 @@ char get_winner(char board[BOARD_LENGTH][BOARD_LENGTH])
 {
     char winner = '-';
     bool ganando = true;
-    int fila = 0;
-    int columna = 0;
-    
+  
     // while (fila < BOARD_LENGTH) {
     //     columna = 0;
     //     while (columna<BOARD_LENGTH){
@@ -94,7 +92,7 @@ char get_winner(char board[BOARD_LENGTH][BOARD_LENGTH])
         }
         
     }
-    
+    ganando = true;
     for (unsigned int j = 0; j<BOARD_LENGTH; j ++) {
         //      COLUMNAS
         for (unsigned int i = 0; i<BOARD_LENGTH; i++){
@@ -108,11 +106,35 @@ char get_winner(char board[BOARD_LENGTH][BOARD_LENGTH])
     }
 
 
+    //    VAMOS AHORA CON LAS DIAGONALES. PRINCIPAL:
+      
+    int fila = 0;
+    int columna = 0;
+    int elemento1_en_diagonal_principal = board [0][0];
+    ganando = true;
+        // Me fijo en la diagonal principal
+        for (unsigned j = 0,k=0;  j<BOARD_LENGTH,k<BOARD_LENGTH;j++,k++){
+            ganando = ganando && (board[0][0]==board[j][k]);
+        }
+        if (ganando){
+            winner = board [0][0];
+        }
+        ganando = true;
+        // Me fijo en la diagonal secundaria
+        for (unsigned j = 0,k=BOARD_LENGTH-1;  j<BOARD_LENGTH,k<BOARD_LENGTH;j++,k--){
+            ganando = ganando && (board[0][k]==board[j][k]);
+        }
+        if (ganando){
+            winner = board [0][0];
+        }
+
+
 
     //
+    
+  
     return winner;
-    }
-
+}
 
 
 
