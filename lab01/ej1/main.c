@@ -77,15 +77,18 @@ unsigned int array_from_file(int array[],
 
 }
 
-
 void array_dump(int a[], unsigned int length) {
-    //your code here!!!
 
-    for (unsigned int i = 0;i<length;i++) {
-        printf ("%d",a[i]);
+  unsigned int i = 0;
+  printf("[");
+  while (i < length) {
+    printf("%d", a[i]);
+    if (i != length - 1) {
+      printf(", ");
     }
-
-
+    i = i + 1;
+  }
+  printf("]\n");
 }
 
 

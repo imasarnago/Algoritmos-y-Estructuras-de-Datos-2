@@ -45,15 +45,12 @@ unsigned int array_from_file(int array[],
 
  bool array_is_sorted(int a[], unsigned int length) {
 
-
     bool ordenado = true;
     for (unsigned int i = 0; i<length;i++) {
         if ((a[i]<=a[i+1]) && ordenado){
             ordenado = true;
         }
+        else {ordenado = false;}
     }
     return ordenado;
-
-
-
  }

@@ -1,7 +1,3 @@
-
-                                                                  /////////  EJERCICIO NUMERO 2 (DOS)
-
-
 /* First, the standard lib includes, alphabetically ordered */
 #include <assert.h>
 #include <stdbool.h>
@@ -45,49 +41,51 @@ char *parse_filepath(int argc, char *argv[]) {
     return result;
 }
 
+unsigned int array_from_stdin(int array[],unsigned int max_size) {
 
-unsigned int array_from_stdin(int array[],
-                              int max_size) {
+    //your code here!!!    EJERCICIO 1
 
-    //your code here!!!    EJERCICIO 2
-    int contador;
-    printf("Ingrese el tamaño del arreglo: ");
-    scanf("%d",&max_size);
-
-    printf("Ingrese a continuacion los elementos del arreglo. Luego de cada uno, presione ENTER : \n");
-    for (contador = 0;contador<max_size;contador++){
-        scanf ("%d",&array[contador]);
+  FILE *fileSTD = stdin; 
+  printf ("Ingrese una longitud de su arreglo:\n");
+  scanf ("%u",&max_size);
+  unsigned int contador = 0;
+  //unsigned int numero_leido;
+  if (max_size>MAX_SIZE) {
+    printf ("ERROR GARRAFAL !!!!!!!!!!!!!!!!!!!");
+  }else {
+    while (contador<max_size && fscanf(fileSTD,"%d",&array[contador])==1){
+      contador++;
     }
-    return contador;
-
+  }
+return contador;
 
 }
 
 void array_dump(int a[], unsigned int length) {
-    //your code here!!!
 
-    for (unsigned int i = 0;i<length;i++) {
-        printf ("%d",a[i]);
+  unsigned int i = 0;
+  printf("[");
+  while (i < length) {
+    printf("%d", a[i]);
+    if (i != length - 1) {
+      printf(", ");
     }
-
-
+    i = i + 1;
+  }
+  printf("]\n");
 }
 
 
 int main() {
-    //char *filepath __attribute__((unused)) = NULL; // UNUSED indica al compilador que la variable puede estar sin usar
-
-    /* parse the filepath given in command line arguments */
-    //filepath = parse_filepath(argc, argv);
-
+    //char *filepath = NULL;
     printf("Hasta aqui me ejecuto!");
     
     /* create an array of MAX_SIZE elements */
     int array[MAX_SIZE];
     
     /* parse the file to fill the array and obtain the actual length */
-    //unsigned int length = array_from_file(array, MAX_SIZE, filepath);
     unsigned int length = array_from_stdin(array, MAX_SIZE);
+
     
     /*dumping the array*/
     array_dump(array, length);
