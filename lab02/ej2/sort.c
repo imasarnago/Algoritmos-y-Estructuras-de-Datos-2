@@ -19,7 +19,7 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
     if (der>izq){ 
         ppiv = partition(a, izq, der);
         
-        // quick_sort_rec(a,izq,ppiv-1); La alternativa (esta línea) es decir ppiv - 1, pero como ppiv puede ser 0 y 0-1 hace overflow, entonces hago:
+        // La alternativa es decir ppiv - 1, pero como ppiv puede ser 0 y 0-1 hace overflow, entonces hago:
         quick_sort_rec(a, izq, (ppiv == 0u) ? 0u : ppiv - 1u);
         
         quick_sort_rec(a, ppiv + 1, der);

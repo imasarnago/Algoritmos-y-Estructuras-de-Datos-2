@@ -71,23 +71,56 @@ int main(int argc, char *argv[]) {
     printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
 
     /* all the same for insertion_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para insertion_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
+    /* create a copy of the array */
+
+    /* reset counters and set time */
+    reset_comparisons_counter();
+    reset_swaps_counter();
+    set_current_time();
+
+    /* do the actual sorting */
+    insertion_sort(copy, length);
+
+    /* show statistics for selection_sort */
+    printf("statistics for insertion_sort\n");
+    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
 
 
     /* all the same for quick_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para quick_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
+    /* create a copy of the array */
+
+    /* reset counters and set time */
+    reset_comparisons_counter();
+    reset_swaps_counter();
+    set_current_time();
+
+    /* do the actual sorting */
+    quick_sort(copy, length);
+
+    /* show statistics for selection_sort */
+    printf("statistics for quick_sort\n");
+    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
 
 
 
     return EXIT_SUCCESS;
 }
+
+
+
+
+/* 
+    Lo que notamos al correr todos estos algoritmos con un arreglo desordenado (unsorted.in), es que selection_sort demora 41 segundos más que
+    los otros dos, que demoran exactamente lo mismo (0.002 segundos.). Además, el quick_sort realiza el doble de comparaciones que
+    selection_sort
+
+    Con un arreglo ordenado (sorted.in), todos los algoritmos demoran lo mismo y realizan la misma cantidad de comparaciones que en el caso 
+    anterior. Selection_sort demoró 0.003 segundos más que antes.
+
+    Con un arreglo totalmente vacío, observamos que quick_sort es bastante más rápido que todos los demás y que el más lento de los tres
+    es el primer algoritmo (selection_sort).
+
+    Con un arreglo ordenado de manera ascendente o descendente, el selection_sort realiza aproximadamente la mitad de comparaciones que quick_sort
+    y además es mucho más rápido. 
+
+*/

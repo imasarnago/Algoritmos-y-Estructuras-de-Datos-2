@@ -9,13 +9,6 @@
 
 
 static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
-
-    /* Permutes elements of a[izq..der] and returns pivot such that:
-     - izq <= pivot <= der
-     - elements in a[izq,pivot) all 'go_before' (according to function goes_before) a[pivot]
-     - a[pivot] 'goes_before' all the elements in a(pivot,der]
-    */
-
    unsigned int i = izq+1;
    unsigned int j = der;
    unsigned int ppiv = izq; 
@@ -26,6 +19,8 @@ static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
         j--;
     }else if (a[i] > a[ppiv] && a[j] < a[ppiv]) {
         swap(a,i,j);
+        i++;
+        j--;
     }
    }
    swap(a,ppiv,j);

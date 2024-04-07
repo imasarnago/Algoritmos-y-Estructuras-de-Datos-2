@@ -13,5 +13,6 @@ void quick_sort(fixstring a[], unsigned int length);
     The array 'a' must have exactly 'length' elements.
 
 */
+void quick_sort_length(fixstring a[], unsigned int length);
 
 #endif

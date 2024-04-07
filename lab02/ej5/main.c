@@ -44,30 +44,38 @@ char *parse_filepath(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
-    char *filepath = NULL;
+  char *filepath = NULL;
 
-    /* parse the filepath given in command line arguments */
-    filepath = parse_filepath(argc, argv);
+  /* parse the filepath given in command line arguments */
+  filepath = parse_filepath(argc, argv);
 
-    /* create an array of MAX_SIZE elements */
-    fixstring array[MAX_SIZE];
+  /* create an array of MAX_SIZE elements */
+  fixstring array[MAX_SIZE];
 
-    /* parse the file to fill the array and obtain the actual length */
-    unsigned int length = array_from_file(array, MAX_SIZE, filepath);
+  /* parse the file to fill the array and obtain the actual length */
+  unsigned int length = array_from_file(array, MAX_SIZE, filepath);
 
-    /* create a copy of the array, to do some checks later */
-    fixstring copy[MAX_SIZE];
-    array_copy(copy, array, length);
+  /* create a copy of the array, to do some checks later */
+  fixstring copy[MAX_SIZE];
+  array_copy(copy, array, length);
 
-    quick_sort(array, length);
+  quick_sort(array, length);
 
-    /* show the ordered array in the screen */
-    array_dump(array, length);
+  /* show the ordered array in the screen */
+  printf("Ordenado segun orden alfabetico mediante quick_sort\n");
+  array_dump(array, length);
 
-    /* check if it is sorted */
-    assert(array_is_sorted(array, length));
+  /* check if it is sorted */
+  assert(array_is_sorted_alpha(array, length));
 
-    /* check if it is a permutation of original */
-    assert(array_is_permutation_of(copy, array, length));
-    return EXIT_SUCCESS;
+  quick_sort_length(array, length);
+
+  /* show the ordered array in the screen */
+  printf("\nOrdenado segun orden de longitud mediante quick_sort_length\n");
+  array_dump(array, length);
+
+  assert(array_is_sorted_length(array, length));
+  /* check if it is a permutation of original */
+  assert(array_is_permutation_of(copy, array, length));
+  return EXIT_SUCCESS;
 }
