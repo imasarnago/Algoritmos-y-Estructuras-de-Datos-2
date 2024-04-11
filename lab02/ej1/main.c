@@ -71,3 +71,6 @@ int main(int argc, char *argv[]) {
   assert(array_is_permutation_of(copy, array, length));
   return EXIT_SUCCESS;
 }
+
+
+/*  goes_before ordena tomando modulo a todos los elementos y ordenandolos de manera ascendente  */
