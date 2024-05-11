@@ -2,10 +2,11 @@
 #include <stdio.h>   /* printf()...     */
 #include "pair.h"    /* TAD Par         */
 
-
-static void show_pair(pair_t p) {
-    printf("(%d, %d)\n", pair_first(p), pair_second(p));   
+static
+void show_pair(pair_t p) {
+    printf("(%d, %d)\n", p.values[0], p.values[1]);
 }
+
 
 int main(void) {
     pair_t p, q;

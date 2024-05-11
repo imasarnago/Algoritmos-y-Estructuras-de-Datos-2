@@ -22,10 +22,13 @@ int main(void) {
     /* ---------------------------- Reescribir ---------------------------- */
     //
     // Se pueden agregar cosas antes del `for` de ser necesario
+
+
+    
+    p = arr;        // Problem solved 
     //
     for (unsigned int i=0u; i < ARRAY_SIZE; i++) {
-        p = &arr[i];  // FIXME: Se usa operador &
-        *p = 0;       // FIXME: Se usa operador *
+        p[i] = 0;      // Problem solved
     }
     /* -------------------------------------------------------------------- */
     printf("after : ");
@@ -34,3 +37,6 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
+
+//  Se debe reescribir la sección de código indicada para que mediante el puntero p se
+// inicialice en cero el arreglo arr sin utilizar los operadores & y * en ningún momento

@@ -15,6 +15,6 @@ typedef struct _player_t {
     unsigned int age;
     unsigned int points;
     unsigned int tournaments;
-} * player_t; // NOTE! player_t is an alias of struct _player_t *
+} * player_t; // NOTE! player_t is an alias of struct _player_t * . Ahora estoy hablando de un puntero a una estructura!
 
 #endif //_PLAYER_H

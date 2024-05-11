@@ -37,13 +37,18 @@ char *parse_filepath(int argc, char *argv[]) {
     return (result);
 }
 
+
+
+
 bool matching_parentheses(FILE * file) {
     counter c = NULL;
     bool balanced = true;
     char letter;
 
+    c = counter_init();
+
     while (!feof(file) && balanced) {
-        letter = fgetc(file);
+        letter = fgetc(file);                            
         if (letter == '(') {
             counter_inc(c);
         } else if (counter_is_init(c)) {
@@ -52,7 +57,9 @@ bool matching_parentheses(FILE * file) {
             counter_dec(c);
         }
     }
-    return (balanced && counter_is_init(c));
+    bool result =  (balanced && counter_is_init(c));
+    counter_destroy (c);
+    return result;
 }
 
 int main(int argc, char *argv[]) {
@@ -71,6 +78,7 @@ int main(int argc, char *argv[]) {
     } else {
         printf("Parentheses mismatch.\n");
     }
+    
 
     return (EXIT_SUCCESS);
 }

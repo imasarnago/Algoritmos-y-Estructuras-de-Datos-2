@@ -35,6 +35,19 @@ int main(void) {
        AYUDA: podes usar GDB para consultares valores de variables y la dirección de memoria donde estan alojadas.
     */
 
+    // Siempre inicializar los punteros en NULL
+    int *p = NULL;
+    p = &x;
+    person_t *q = NULL;
+    q = &m;
+
+    *p = 9;
+    q ->age = 100;
+    q ->name_initial = 'F';
+
+    *(a + 1) = 42; // Segun ChatGPT, en la aritmetica de punteros es posible hacer esto. Se asume que 'a' es un puntero al primer elemento del arreglo
+
+
     printf("x = %d\n", x);
     printf("m = (%d, %c)\n", m.age, m.name_initial);
     printf("a[1] = %d\n", a[1]);

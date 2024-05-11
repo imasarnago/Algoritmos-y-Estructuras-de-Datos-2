@@ -8,7 +8,7 @@ struct s_pair_t {
     int snd;
 };
 
-pair_t pair_new(int x, int y);
+pair_t pair_new(int x, int y);  // Definida en pair.c
 /*
  * DESC: Creates a new pair with components (x, y)
  *
@@ -58,4 +58,4 @@ pair_t pair_destroy(pair_t p);
  */
 
 
-#endif
+#endif 
