@@ -29,7 +29,7 @@ static bool invrep(abb tree) {
             b = (!elem_less(tree->elem,tree->left->elem)) && invrep(tree->right);
         }
         if (!abb_is_empty(tree->right)){
-            b = (!elem_less(tree->elem,tree->right->elem)) && invrep(tree->left);
+            b = (elem_less(tree->elem,tree->right->elem)) && invrep(tree->left);
         }
     }
 
@@ -37,19 +37,29 @@ static bool invrep(abb tree) {
 }
 
 abb abb_empty(void) {
-    abb tree;
-    /*
-     * Needs implementation
-     */
+    abb tree = NULL;
     assert(invrep(tree) && abb_is_empty(tree));
     return tree;
 }
 
 abb abb_add(abb tree, abb_elem e) {
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
+    
+    if (abb_is_empty(tree)) {
+        tree = malloc(sizeof(abb));
+        tree->elem=e;
+        tree->left=NULL;
+        tree->right=NULL;
+    }
+    else {
+        if (elem_less(e,tree->elem)) {
+            tree->left = abb_add(tree->left,e);
+        }
+        if (elem_less(tree->elem,e) && !elem_eq(e, tree->elem)) {
+            tree->right = abb_add(tree->right,e);
+        }
+    }
+
     assert(invrep(tree) && abb_exists(tree, e));
     return tree;
 }
@@ -57,18 +67,18 @@ abb abb_add(abb tree, abb_elem e) {
 bool abb_is_empty(abb tree) {
     bool is_empty=false;
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
+    is_empty = tree ==NULL;
     return is_empty;
 }
 
 bool abb_exists(abb tree, abb_elem e) {
     bool exists=false;
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
+    
+    if (!abb_is_empty(tree)) {
+        exists = elem_eq(e,tree->elem) || elem_eq(e,tree->left) || elem_eq(e,tree->right);
+    }
+
     assert(abb_length(tree)!=0 || !exists);
     return exists;
 }
@@ -76,18 +86,52 @@ bool abb_exists(abb tree, abb_elem e) {
 unsigned int abb_length(abb tree) {
     unsigned int length=0;
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
+    
+    if (!abb_is_empty(tree)) {
+        length = 1 + abb_length(tree->left) + abb_length(tree->right);
+    }
+
     assert(invrep(tree) && (abb_is_empty(tree) || length > 0));
     return length;
 }
 
 abb abb_remove(abb tree, abb_elem e) {
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
+
+    if (!abb_is_empty(tree)) {
+
+        if (elem_less(e, tree->elem)) {
+            tree->left = abb_remove(tree->left,e);
+        }
+        else if (elem_less(tree->elem,e)) {
+            tree->right = abb_remove(  tree->right,e);
+        }
+        else {
+            abb aux = tree;
+            if (tree->left==NULL) {
+                tree = tree->right;
+                free(aux);
+            }
+            else if (tree->right==NULL) {
+                tree = tree->left;
+                free(aux);
+            }
+            else {                  // Con las siguientes lineas de codigo del programa me ayudo un compañero. Es un codigo muy limpio y eficaz:
+                aux = NULL;
+                aux = tree->right;
+                
+                while (aux->left != NULL) {
+                    aux = aux->left;
+                }
+                tree->elem = aux->elem;
+                tree->right = abb_remove(tree->right,aux->elem);
+            }
+        }
+    }
+
+
+
+
     assert(invrep(tree) && !abb_exists(tree, e));
     return tree;
 }
@@ -96,9 +140,9 @@ abb abb_remove(abb tree, abb_elem e) {
 abb_elem abb_root(abb tree) {
     abb_elem root;
     assert(invrep(tree) && !abb_is_empty(tree));
-    /*
-     * Needs implementation
-     */
+    
+    root = tree->elem;
+
     assert(abb_exists(tree, root));
     return root;
 }
@@ -106,9 +150,9 @@ abb_elem abb_root(abb tree) {
 abb_elem abb_max(abb tree) {
     abb_elem max_e;
     assert(invrep(tree) && !abb_is_empty(tree));
-    /*
-     * Needs implementation
-     */
+
+    max_e = abb_is_empty(tree->right) ? tree->elem : abb_max(tree->right);
+
     assert(invrep(tree) && abb_exists(tree, max_e));
     return max_e;
 }
@@ -116,9 +160,9 @@ abb_elem abb_max(abb tree) {
 abb_elem abb_min(abb tree) {
     abb_elem min_e;
     assert(invrep(tree) && !abb_is_empty(tree));
-    /*
-     * Needs implementation
-     */
+    
+    min_e = abb_is_empty(tree->left) ? tree->elem : abb_min(tree->left);
+
     assert(invrep(tree) && abb_exists(tree, min_e));
     return min_e;
 }
@@ -142,10 +186,14 @@ void abb_dump(abb tree, abb_ordtype ord) {
 
 abb abb_destroy(abb tree) {
     assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
-    assert(tree == NULL);
+
+    if (!abb_is_empty(tree)) {
+        abb_destroy(tree->left);
+        abb_destroy(tree->right);
+        free(tree);
+        tree = NULL;
+    }
+
     return tree;
 }
 
