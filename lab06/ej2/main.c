@@ -27,5 +27,5 @@ int main (void) {
 }
 
 /*
-
+git remote add origin ____________
 */
