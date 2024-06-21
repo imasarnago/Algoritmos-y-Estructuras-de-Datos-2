@@ -46,7 +46,7 @@ abb abb_add(abb tree, abb_elem e) {
     assert(invrep(tree));
     
     if (abb_is_empty(tree)) {
-        tree = malloc(sizeof(abb));
+        tree = malloc(sizeof(*tree));
         tree->elem=e;
         tree->left=NULL;
         tree->right=NULL;
@@ -124,7 +124,7 @@ abb abb_remove(abb tree, abb_elem e) {
                     aux = aux->left;
                 }
                 tree->elem = aux->elem;
-                tree->right = abb_remove(tree->right,aux->elem);
+                tree->right = abb_remove(tree->right,aux->elem);   // ESTO NO TERMINO DE ENTENDER POR QUE FUNCIONA
             }
         }
     }

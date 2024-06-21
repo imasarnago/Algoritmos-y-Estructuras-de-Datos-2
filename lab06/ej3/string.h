@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-typedef struct _s_string* string;
+typedef struct _s_string *string;
 
 /* Creates a new string copying the characters
  * of the given [word].

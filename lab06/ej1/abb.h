@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-typedef struct _s_abb * abb;
+typedef struct _s_abb *abb;
 
 typedef int abb_elem;
 
